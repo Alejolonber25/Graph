@@ -63,13 +63,23 @@ public class Graph<V> implements IGraph<V>{
     @Override
     public boolean deleteEdge(Vertex<V> v1, Vertex<V> v2) {
         if(addressed){
-            v1.getAdjacencyList().remove(v2);
-            return true;
+            if(v1.adjacencyList.contains(v2)){
+                v1.getAdjacencyList().remove(v2);
+                return true;
+            }else{
+                return false;
+            }
+            
         }else{
-            v1.getAdjacencyList().remove(v2);
-            v2.getAdjacencyList().remove(v1);
+            if(v1.adjacencyList.contains(v2) && v2.adjacencyList.contains(v1)){
+                v1.getAdjacencyList().remove(v2);
+                v2.getAdjacencyList().remove(v1);
+                return true;
+            }else{
+                return false;
+            }
         }
-        return false;
+        
     }
 
     @Override
